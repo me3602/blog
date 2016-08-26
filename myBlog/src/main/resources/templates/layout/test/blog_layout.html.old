@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <title layout:title-pattern="$CONTENT_TITLE :: $DECORATOR_TITLE">My Blog</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="/webjars/bootstrap/3.3.5/dist/css/bootstrap.min.css" />
+  <style>
+  /*global*/
+  a{
+  	text-decoration:none;
+  	color:black;
+  }
+  a:visited{
+  	text-decoration:none;
+  	color:black;
+  }
+  a:link{
+  	text-decoration:none;
+  	color:black;
+  }
+  a:hover{
+  	text-decoration:none;
+  	color:gray;
+  }
+  /* nav css */
+  	#navbar_inside{
+  		padding: 50px 0 10px 0;
+  	}
+  	#brand_text{
+  		width:100px;
+  		text-align:center;
+  		font-size:2em;
+  	}
+  /*contents css*/
+  #cetents{
+  	border-top: 3px solid #D8D8D8;
+  	border-bottom: 3px solid #D8D8D8;
+  }
+  .article_list{
+  	padding: 10px 0 10px 0;
+  	border-bottom: 2px solid #D8D8D8;
+  }
+  .contents_subinfo{
+  	color:#585858;
+  	margin-right:10px;
+  }
+  /* subnav */
+  #subnav{	
+  
+  }
+  /* category css */
+  	.category{
+  		background-color:black;  		
+  	}
+  	.category > h1{
+  		display:inline-block;
+  	}
+  	.category > h3{
+  		padding:0 0 10px 0;
+  	}
+  </style>
+  <script src="/webjars/jquery/2.1.4/dist/jquery.min.js"></script>
+</head>
+<body>
+<!-- nav -->
+<nav th:replace="layout/common/default_nav"></nav>
+<!-- header -->
+  <header layout:fragment="header" style="display:none;">
+   
+  </header>
+<!-- category -->
+	<div class="category">
+    	<h1 th:text="${category}">category</h1>
+    	<h3>카테고리 설명</h3>
+    </div>
+<!-- contents -->	
+  <section>
+    <div class="container" >
+    	<div class="row">
+    		<div th:replace="layout/common/default_contents">
+    			contents
+	    	</div>
+	    	<div th:replace="layout/common/default_right"></div>		    
+    	</div>    	
+    </div>    
+  </section>
+<!-- footer -->
+  <footer layout:fragment="footer" style="height:500px; background-color:gray;">
+  
+  </footer>  
+<!-- bootstrap script -->
+<script src="/webjars/bootstrap/3.3.5/dist/js/bootstrap.min.js"></script>
+<script>
+//<![CDATA[
+	$(document).ready(function(){
+		var scrollHeight = document.body.scrollHeight;
+		if(scrollHeight > 700){
+			$(this).bind("scroll",function(){
+				var className = $("#top_nav").attr("class");	
+				if(($(this).scrollTop() != 0) && (className.indexOf("navbar-fixed-top") == -1)){
+					$("#top_nav").addClass("navbar-fixed-top");
+					$("#navbar_inside").animate({"padding" : "0"},100);
+					$("#brand_text").animate({"font-size":"1em"},100);
+				}else if($(this).scrollTop() == 0){
+					$("#top_nav").removeClass("navbar-fixed-top");
+					$("#navbar_inside").animate({"padding" : "50px 0 10px 0"},100);
+					$("#brand_text").animate({"font-size":"2em"},100);
+				}
+			});	
+		}		
+	});
+//]]>
+</script>
+<script src="/js/common.js"></script>
+<!-- custom script -->
+<script layout:fragment="custom-script"></script>
+</body>
+</html>

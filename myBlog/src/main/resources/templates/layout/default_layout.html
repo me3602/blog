@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title layout:title-pattern="$DECORATOR_TITLE :: $CONTENT_TITLE">Design</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.5/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/webjars/jqeury-ui/1.9.2/css/smoothness/jqeury-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" href="/css/blog_intro2.css" />
+</head>
+<body>
+<div class="wrap container-fluid">
+	<div class="header" layout:fragment="header"></div>	
+	<div class="section row">
+		<!-- small nav -->
+		<div class="nav-sm navbar navbar-default navbar-fixed-top hidden-lg hidden-md">
+			<div class="nav-logo pull-left">
+				<span class="glyphicon glyphicon-off"></span>
+			</div>
+			<span id="btnSmNav" class="glyphicon glyphicon-align-justify pull-right"></span>
+		</div>
+		<div id="sideNav" class="nav side-nav">			
+			<ul>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+			</ul>
+		</div>
+		<!-- big nav -->
+		<div class="nav col-lg-2 col-md-2 hidden-sm hidden-xs">
+			<div class="nav-logo">
+				<span class="glyphicon glyphicon-off"></span>
+				<p>IDTEST</p>
+			</div>
+			<ul>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+				<li>메뉴</li>
+			</ul>		
+		</div>	
+		<div class="blank col-lg-2 col-md-2"></div>	
+		<div class="contents_wrap col-lg-10 col-md-10">
+			<div class="container" >
+				<div class="row">
+					<div class="contents col-lg-9 col-md-9" layout:fragment="contents"></div>
+					<div class="aside col-lg-3 col-md-3">
+						<!-- aside -->
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>	
+<!-- 
+	<div class="footer">
+		<div class="footer-contents">
+			<p><span class="glyphicon glyphicon-chevron-up"></span></p>
+			<p>푸터 테스트 영역</p>
+		</div>
+		<div>
+			<p>Copyright © 2015 All Rights Reserved.</p>
+		</div>	
+	</div>
+-->
+</div>	
+<script src="/webjars/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="/webjars/jquery-ui/1.9.2/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/webjars/bootstrap/3.3.5/dist/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#btnSmNav').on('click',function(){
+			$('#sideNav').toggleClass('offcanvas',300);
+		});
+	});
+</script>
+<script layout:fragment="custom-script"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <title layout:title-pattern="$CONTENT_TITLE :: $DECORATOR_TITLE">My Blog</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="stylesheet" href="/webjars/bootstrap/3.3.5/dist/css/bootstrap.min.css" />
+  <style>
+  /* nav css */
+  	#navbar_inside{
+  		padding: 50px 0 10px 0;
+  	}
+  	#brand_text{
+  		width:100px;
+  		text-align:center;
+  		font-size:2em;
+  	}
+  /* subnav */
+  #subnav{
+  	background-color:gray;
+  }
+  /* category css */
+  	.category{
+  		background-color:black;  		
+  	}
+  	.category > h1{
+  		display:inline-block;
+  	}
+  	.category > h3{
+  		padding:0 0 10px 0;
+  	}
+  </style>
+</head>
+<body>
+<!-- nav -->
+	<nav id="top_nav" class="navbar navbar-default" style="margin-bottom:0;">
+  <div id="navbar_inside" class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" id="brand_text" href="#">
+      	<p>Brand</p>
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search"/>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<!-- header -->
+  <header layout:fragment="header" style="display:none;">
+   
+  </header>
+<!-- category -->
+	<div class="category">
+    	<h1 th:text="${category}">category</h1>
+    	<h3>카테고리 설명</h3>
+    </div>
+<!-- contents -->	
+  <section>
+    <div class="container" >
+    	<div class="row">
+    		<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" layout:fragment="content">
+    			contents
+	    	</div>
+		    <div id="subnav" class="hidden-xs hidden-sm col-md-3 col-lg-3">
+			    <div class="profile" style="display:inline-block;">
+				    <div class="profile_img" style="width:50%;float:left;">
+				    	<img src="http://thesocialmediamonthly.com/wp-content/uploads/2015/08/photo.png" alt="profile_img" class=" img-responsive"/>
+				    </div>	
+				    <div class="profile_text" style="float:left;">
+				    	<span style="display:inline-block;vertical-align:middle;"></span>
+				    	<ul>
+				    		<li>asdasd</li>
+				    		<li></li>
+				    	</ul>
+				    </div>
+			    </div>
+		    </div>
+    	</div>    	
+    </div>    
+  </section>
+<!-- footer -->
+  <footer layout:fragment="footer">
+    
+  </footer>
+  
+<!-- bootstrap script -->
+<script src="/webjars/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.5/dist/js/bootstrap.min.js"></script>
+<!-- custom script -->
+<script layout:fragment="custom-script"></script>
+<script>
+//<![CDATA[
+	$(document).ready(function(){
+		$(this).bind("scroll",function(){
+			var className = $("#top_nav").attr("class");	
+			if(($(this).scrollTop() != 0) && (className.indexOf("navbar-fixed-top") == -1)){
+				$("#top_nav").addClass("navbar-fixed-top");
+				$("#navbar_inside").animate({"padding" : "0"},100);
+				$("#brand_text").animate({"font-size":"1em"},100);
+			}else if($(this).scrollTop() == 0){
+				$("#top_nav").removeClass("navbar-fixed-top");
+				$("#navbar_inside").animate({"padding" : "50px 0 10px 0"},100);
+				$("#brand_text").animate({"font-size":"2em"},100);
+			}
+		});
+	});
+//]]>
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/blog_layout">
+<head></head>
+<body>
+<!-- header -->
+  <header layout:fragment="header">
+   	header
+  </header>
+<!-- contents -->
+  <section layout:fragment="content">
+<div class="article_list" th:each="data, info:${list}">
+	<h1><a href="#">글제목</a></h1>
+	<span class="contents_subinfo">작성일:2015.08.16</span><span class="contents_subinfo" th:text="'조회수:'+${info.index}">조회수:0</span><span  class="contents_subinfo">댓글수:0</span>
+	<h3><a href="#" th:text="${#strings.substring(data,0,400)+'...'}">요약내용</a></h3>
+</div>
+</section>
+<!-- footer -->
+  <footer layout:fragment="footer">
+    footer
+  </footer>
+<!-- custom script -->
+<script layout:fragment="custom-script"></script>
+</body>
+</html>

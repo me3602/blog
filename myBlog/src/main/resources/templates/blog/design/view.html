@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/design_layout">
+<head>
+<title>view</title>
+</head>
+<body>
+<div  layout:fragment="contents">
+<div class="bbs_wrap">
+<div class="row">
+	<div class="col-lg-9 col-md-12">
+		<div class="view_top">
+			<h1>Post Title<small> - Category</small></h1>
+			<p class="">
+				<span><strong>Post on</strong> 2015.12.18</span>
+				<span class="glyphicon glyphicon-eye-open">0</span>
+				<span class="glyphicon glyphicon-comment">0</span>
+				<span class="glyphicon glyphicon-heart">0</span>
+			</p>			
+		</div>	
+		<div class="view_contents">
+				Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
+Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
+Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
+Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus.
+		</div>		
+		<div class="other-row row">
+		  <div class="col-md-3">
+		    <a href="#" class="thumbnail">
+		      <img src="/image/space.png" alt="..."/>
+		       <p>aaaa</p>
+		    </a>		   
+		  </div>
+		   <div class="col-md-3">
+		    <a href="#" class="thumbnail">
+		      <img src="/image/space.png" alt="..."/>
+		       <p>aaaa</p>
+		    </a>		   
+		  </div>
+		   <div class="col-md-3">
+		    <a href="#" class="thumbnail">
+		      <img src="/image/space.png" alt="..."/>
+		       <p>aaaa</p>
+		    </a>		   
+		  </div>
+		   <div class="col-md-3">
+		    <a href="#" class="thumbnail">
+		      <img src="/image/space.png" alt="..."/>
+		       <p>aaaa</p>
+		    </a>		   
+		  </div>		 
+		</div>
+		<div class="view_post_nav">
+			<ul class="pager">
+			    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 이전 글 제목</a></li>
+			    <li class="next"><a href="#">다음 글 제목 <span aria-hidden="true">&rarr;</span></a></li>
+			  </ul>
+		</div>
+		<!-- <div class="view_comment">
+			<h3>Comment 0 :</h3>
+			<div class="row comment">
+				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+					<p>id</p>
+					<p>2015.12.18</p>
+				</div>
+				<div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
+					Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
+Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
+Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
+Etiam rhoncus.
+				</div>
+			</div>
+			<div class="row comment">
+				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+					<p>id</p>
+					<p>2015.12.18</p>
+				</div>
+				<div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
+					Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
+Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
+Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
+Etiam rhoncus.
+				</div>
+			</div>
+			<div class="row comment">
+				<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+					<p>id</p>
+					<p>2015.12.18</p>
+				</div>
+				<div class="col-lg-10 col-md-10 col-sm-9 col-xs-9">
+					Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
+Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
+Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
+Etiam rhoncus.
+				</div>
+			</div>
+		</div>	 -->	
+	</div>
+</div>
+</div>
+</div>
+
+<div  layout:fragment="sm-contents">
+<div class="bbs_wrap">
+<div class="row">
+	<div class="col-lg-9 col-md-12">
+		<div class="view_top">
+			<h1>Post Title<small> - Category</small></h1>
+			<p class="">
+				<span><strong>Post on</strong> 2015.12.18</span>
+				<span class="glyphicon glyphicon-eye-open">0</span>
+				<span class="glyphicon glyphicon-comment">0</span>
+				<span class="glyphicon glyphicon-heart">0</span>
+			</p>			
+		</div>	
+		<div class="view_contents">
+				Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
+Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
+Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
+Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus.
+		</div>		
+		<div class="view_post_nav">
+			<ul class="pager">
+			    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 이전 글 제목</a></li>
+			    <li class="next"><a href="#">다음 글 제목 <span aria-hidden="true">&rarr;</span></a></li>
+			  </ul>
+		</div>
+		<div class="other-row row">
+		  <div class="col-md-3">
+		    <a href="#" class="thumbnail">
+		      <img src="/image/space.png" alt="..."/>
+		       <p>aaaa</p>
+		    </a>		   
+		  </div>
+		   <div class="col-md-3">
+		    <a href="#" class="thumbnail">
+		      <img src="/image/space.png" alt="..."/>
+		       <p>aaaa</p>
+		    </a>		   
+		  </div>
+		   <div class="col-md-3">
+		    <a href="#" class="thumbnail">
+		      <img src="/image/space.png" alt="..."/>
+		       <p>aaaa</p>
+		    </a>		   
+		  </div>
+		   <div class="col-md-3">
+		    <a href="#" class="thumbnail">
+		      <img src="/image/space.png" alt="..."/>
+		       <p>aaaa</p>
+		    </a>		   
+		  </div>		 
+		</div>		
+	</div>
+</div>
+</div>
+</div>
+<script layout:fragment="custom-script"></script>
+</body>
+</html>

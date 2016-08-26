@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title layout:title-pattern="$DECORATOR_TITLE :: $CONTENT_TITLE">Myblog</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.5/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/webjars/jquery-ui/1.9.2/css/smoothness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" href="/css/blog_intro2.css" />
+</head>
+<body>
+<div class="wrap container-fluid">
+	<div class="header" layout:fragment="header"></div>	
+	<div class="section row">
+		<!-- small nav -->
+		<div class="nav-sm navbar navbar-default hidden-lg hidden-md col-sm-12 col-xs-12">
+			<div class="nav-logo-sm">
+				<span class="glyphicon glyphicon-off pull-left"></span>
+				<span id="btnSmNav" class="glyphicon glyphicon-align-justify pull-right"></span>
+			</div>
+			<!-- <div id="sideNav" class="nav side-nav">			
+				<ul th:each="root,info :${categoryRoots}">
+					<li><a href="#" th:text="${root.cat_name}" th:href="'javascript:viewSubMenu(\''+${root.cat_name}+'\');'"></a></li>
+				</ul>
+			</div>	 -->	
+		</div>
+		
+		<!-- big nav -->
+		<div class="nav col-lg-2 col-md-2 hidden-sm hidden-xs">
+			<div class="nav-logo">
+				<span class="glyphicon glyphicon-off"></span>
+				<p>IDTEST</p>
+			</div>
+			<ul>
+				<li th:each="root,info :${categoryRoots}">
+					<a href="#" th:id="'root_'+${root.cat_name}" th:text="${root.cat_name}" th:href="'javascript:viewSubMenu(\''+${root.cat_name}+'\');'">Menu</a>
+					<ul class="sub" th:id="${root.cat_name}"></ul>
+				</li>
+			</ul>
+		</div>	
+		<div class="blank col-lg-2 col-md-2"></div>	
+		<div class="contents_wrap col-lg-10 col-md-10 col-sm-12 col-xs-12">
+			<div class="container" >
+				<div class="row">
+					<div class="contents col-lg-9 col-md-9  col-sm-12 col-xs-12" layout:fragment="contents"></div>
+					<div class="aside col-lg-3 col-md-3">
+						<!-- aside -->
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>	
+<!-- 
+	<div class="footer">
+		<div class="footer-contents">
+			<p><span class="glyphicon glyphicon-chevron-up"></span></p>
+			<p>푸터 테스트 영역</p>
+		</div>
+		<div>
+			<p>Copyright © 2015 All Rights Reserved.</p>
+		</div>	
+	</div>
+-->
+</div>	
+<script src="/webjars/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="/webjars/jquery-ui/1.9.2/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/webjars/bootstrap/3.3.5/dist/js/bootstrap.min.js"></script>
+<script th:inline="javascript">
+//<![CDATA[
+    var prefix = /*[[@{/blog/}]]*/'';
+	$(document).ready(function(){
+		$('#btnSmNav').on('click',function(){
+			$('#sideNav').toggleClass('offcanvas',300);
+		});
+	});
+	
+	function viewSubMenu(name){
+		var a = $('#root_'+name);
+		var ul = $('#'+name);
+		
+		if($(ul).attr('data-already') == 'true'){
+			$(a).toggleClass('on','fast','swing');
+			$(ul).toggle('blind',600);
+			return true;
+		}
+		
+		$.get('/blog/json/subMenu/'+name,{},function(data){	
+			$(a).toggleClass('on','fast','swing');
+			var subMenu = '';
+			for(index in data){
+				var subName = data[index].sub_cat_name;
+				var url = (data[index].cat_view_auth == 3)? prefix+subName : prefix+'list/'+subName;
+				subMenu += '<li><a href="'+url+'">'+subName+'</a></li>';				
+			}			
+			$(ul).append(subMenu);
+			$(ul).attr('data-already',true);
+			$(ul).toggle('blind',600);
+		});
+	};
+//]]>
+</script>
+<div class="lib" layout:fragment="lib"></div>	
+<script layout:fragment="custom-script" th:inline="javascript"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+INSERT INTO category(cat_name,cat_view_auth,sub_cat_name) VALUES('Java','0','root'),('PHP','0','root'),('Java','0','Spring'),('Java','0','Core');
+INSERT INTO category(cat_name,cat_view_auth,sub_cat_name) VALUES('Owner','3','root'),('Owner','3','write'),('Owner','3','menu');

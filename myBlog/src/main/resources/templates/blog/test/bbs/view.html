@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/blog_layout">
+<head></head>
+<body>
+<!-- header -->
+  <header layout:fragment="header">
+   	header
+  </header>
+<!-- contents -->
+  <section layout:fragment="content">
+<div class="article_view">
+	<h1>글제목</h1>
+	<span class="contents_subinfo">작성일:2015.08.16</span><span class="contents_subinfo">조회수:0</span><span  class="contents_subinfo">댓글수:0</span>
+	<div>
+		
+	</div>
+</div>
+</section>
+<!-- footer -->
+  <footer layout:fragment="footer">
+    footer
+  </footer>
+<!-- custom script -->
+<script layout:fragment="custom-script"></script>
+</body>
+</html>
+

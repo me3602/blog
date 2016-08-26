@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default_layout">
+<head>
+<title>list</title>
+</head>
+<body>
+<!-- header -->
+  <header layout:fragment="header">
+   	header
+  </header>
+<!-- contents -->
+  <section layout:fragment="content">
+    section
+    <ul th:each="num:${list}">
+    	<li th:text="${num}">num</li>
+    </ul>
+  </section>
+<!-- footer -->
+  <footer layout:fragment="footer">
+    footer
+  </footer>
+<!-- custom script -->
+<script layout:fragment="custom-script"></script>
+</body>
+</html>
