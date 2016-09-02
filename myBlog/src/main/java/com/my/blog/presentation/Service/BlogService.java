@@ -1,10 +1,7 @@
 package com.my.blog.presentation.Service;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +10,19 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.my.blog.domain.model.entity.Board;
-import com.my.blog.domain.model.entity.Category;
-import com.my.blog.infrastructure.dao.BoardDao;
-import com.my.blog.infrastructure.dao.CategoryDao;
+import com.my.blog.infrastructure.dao.BoardDAO;
 import com.my.blog.util.FileUpload;
 
 @Service("BlogService")
 public class BlogService {
 
-	@Autowired
+/*	@Autowired
 	private CategoryDao categoryDao;
 	
 	@Autowired
 	private BoardDao boardDao;
 	
-	@Autowired
-	private FileUpload fileUpload;
+	
 	
 	public List<Category> getBlogRootCategory(){
 		return categoryDao.findRootCategory();
@@ -37,7 +30,13 @@ public class BlogService {
 	
 	public List<Category> getBlogSubCategory(String root) {
 		return categoryDao.findSubCategory(root);		
-	}
+	}*/
+	
+	@Autowired
+	private BoardDAO boardDAO;
+	
+	@Autowired
+	private FileUpload fileUpload;
 
 	public Map<String,Object> setTempFile(MultipartFile file) {
 		Map<String,Object> resultMap = new HashMap<String,Object>();
@@ -62,7 +61,9 @@ public class BlogService {
 		return resultMap;
 	}
 	
-	public void setBoardArticle(Board board){
+	
+	
+/*	public void setBoardArticle(Board board){
 		board.setBd_isdel(0);
 		board.setBd_hit(0);
 		board.setBd_vote(0);
@@ -75,5 +76,5 @@ public class BlogService {
 	public List<Board> getArticleLists(String mode) {
 		return boardDao.findAll();		
 	}
-	
+	*/
 }

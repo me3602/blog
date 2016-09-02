@@ -149,7 +149,8 @@
                    $dropdown.find('button').each(function () {
                         $(this).click(function(){  
                         	var pre = document.createElement('pre');
-                        	$(pre).addClass('brush:js sh');                  	
+                        	$(pre).addClass('brush:js sh'); 
+                        	$(pre).html("<p></p>");
                             $('#summernote').summernote('insertNode', pre);
                         });
                     }); 

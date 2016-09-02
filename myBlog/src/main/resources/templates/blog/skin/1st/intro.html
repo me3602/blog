@@ -1,77 +1,57 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>intro</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="/webjars/bootstrap/3.3.5/dist/css/bootstrap.min.css" />
-<style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-body{
-	border:0; margin:0; padding:0; width:100%;
-	background-color: rgba(0,0,0,0.8);
-	font-family: 'Noto Sans KR', sans-serif;
-	color:#FFFFFF;
-}
-.page-header{
-	border-color: #777;
-}
-
-.intro_contents{
-	padding: 50px 0 50px 0;
-}
-
-.jumbotron{
-	background-color: rgba(0,0,0,0);
-}
-
-.intro_footer{
-	text-align:center;
-}
-
-.center{
-	text-align: center;
-}
-}
+<link rel="stylesheet" href="/webjars/jqeury-ui/1.9.2/css/smoothness/jqeury-ui-1.9.2.custom.min.css" />
+<style>
+.intro-top{height:500px;margin-bottom:60px}
+.line{margin: 100px 0; border-top: 2px solid #eee }
+.intro-footer{man-height: 100px;background-color:#585858;text-align:center;color:#FFF}
+.intro-footer > .glyphicon{font-weight:bold;font-size:1.3em;margin-top:20px;}
 </style>
 </head>
 <body>
-<div class="cover">
+<div class="jumbotron intro-top">
 	<div class="container">
-		<div class="intro_top">
-			<div class="page-header">
-				<h1>Blog Title <small>sub title</small></h1>
-			</div>
-		</div>
-		<div class="intro_contents">
-			<div class="jumbotron">
-				<h1>Window 업그레이드 중</h1>
-				<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-				<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-				<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-				<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-				<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-				<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-				<p class="center"><a class="btn btn-primary btn-lg" href="javascript:enter();" role="button">들어가기</a></p>
-				<!-- <p class="center"><a class="btn btn-primary btn-lg" href="/blog/list/intro" role="button">들어가기</a></p> -->
-			</div>
-		</div>
-		<div class="intro_footer">
-			<h6>Copyright © 2015 All Rights Reserved.</h6>
-		</div>		
+		<h1 class="text-center">Intro</h1>
 	</div>	
 </div>
+<div class="container">
+	<div class="row text-center">
+		<div class="col-lg-4">
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140"/>
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+        </div>
+        <div class="col-lg-4">
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140"/>
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+        </div>
+        <div class="col-lg-4">
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140"/>
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+        </div>
+	</div>
+	<hr class="line"/>
+</div>
+
+<div class="container-fluid intro-footer">
+	<span class="glyphicon glyphicon-menu-up "></span>
+	<h3>Footer</h3>
+	<p>me3602@gmail.com</p>	
+</div>
+
 <script src="/webjars/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="/webjars/jquery-ui/1.9.2/js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="/webjars/bootstrap/3.3.5/dist/js/bootstrap.min.js"></script>
-<script>
-	function enter(){
-		$('body').fadeOut('slow',function(){
-			window.location.href = '/blog/list/intro';
-		});		
-		
-	};
-</script>
 </body>
 </html>

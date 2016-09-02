@@ -1,2 +1,2 @@
-INSERT INTO category(cat_name,cat_view_auth,sub_cat_name) VALUES('Java','0','root'),('PHP','0','root'),('Java','0','Spring'),('Java','0','Core');
-INSERT INTO category(cat_name,cat_view_auth,sub_cat_name) VALUES('Owner','3','root'),('Owner','3','write'),('Owner','3','menu');
+INSERT INTO category(depth,list_seq,name,parent_seq,view_flag) VALUES(0,1,'JAVA',0,'Y'),(0,1,'PHP',0,'Y'),(1,1,'Spring',1,'Y')
+INSERT INTO board(contents,hit,notice_flag,title,user_id,user_nick,cat_seq_no) VALUES('테스트',0,'N','제목','admin','admin',1)

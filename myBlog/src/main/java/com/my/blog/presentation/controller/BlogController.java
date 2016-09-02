@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.my.blog.domain.model.entity.Board;
 import com.my.blog.domain.model.entity.Category;
 import com.my.blog.presentation.Service.BlogService;
 
@@ -34,7 +33,7 @@ public class BlogController {
 		String skin = "1st";
 		
 		//카테고리 조회
-		mav.addObject("categoryRoots", blogService.getBlogRootCategory());
+		//mav.addObject("categoryRoots", blogService.getBlogRootCategory());
 		
 		//게시글 중 5개 만 출력
 		
@@ -46,30 +45,20 @@ public class BlogController {
 	@RequestMapping(value = "/list/{mode}")
 	public ModelAndView getBlogList(ModelAndView mav, @PathVariable String mode, Category c){
 		//DB에서 블로그 스킨 조회
-		String skin = "2nd";
+		String skin = "1st";
 		
-		//카테고리 조회
-		mav.addObject("categoryRoots", blogService.getBlogRootCategory());
 		
-		//카테고리 별 리스트 조회
-		System.out.println(blogService.getArticleLists(mode).toString());
-		
-		mav.setViewName("blog/skin/"+ skin +"/list");
 		return mav;
 	}
 	
 	@RequestMapping(value = "/write", method=RequestMethod.GET)
 	public ModelAndView getBlogWrite(ModelAndView mav){
 		//DB에서 블로그 스킨 조회
-		String skin = "2nd";
+		String skin = "1st";
 		
-		//카테고리 조회
-		mav.addObject("categoryRoots",blogService.getBlogRootCategory());		
-		
-		mav.setViewName("blog/skin/"+ skin + "/write");
 		return mav;		
 	}
-	
+/*	
 	@RequestMapping(value = "/write/{mode}", method=RequestMethod.POST)
 	public Board setArticle(ModelAndView mav, 
 			@PathVariable String mode, 
@@ -83,7 +72,7 @@ public class BlogController {
 		
 		return board;
 	}
-	
+	*/
 	@RequestMapping(value = "/upload/{mode}", method=RequestMethod.POST)
 	public Map<String,Object> setUpload(ModelAndView mav, 
 			@PathVariable String mode, 
@@ -136,10 +125,10 @@ public class BlogController {
 	}
 	
 	/*json*/
-	@RequestMapping(value="/json/subMenu/{root}")
+/*	@RequestMapping(value="/json/subMenu/{root}")
 	public List<Category> getSubCategory(@PathVariable String root){
 		
 		return blogService.getBlogSubCategory(root);
 		
-	}
+	}*/
 }

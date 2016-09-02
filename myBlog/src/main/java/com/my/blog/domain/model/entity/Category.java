@@ -3,65 +3,82 @@ package com.my.blog.domain.model.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="category",uniqueConstraints={@UniqueConstraint(columnNames={"cat_name","sub_cat_name"})})
+@Table(name="CATEGORY",uniqueConstraints={
+		@UniqueConstraint(columnNames={"NAME","PARENT_SEQ"})
+		})
 public class Category {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int cat_id;
+
+	@Id @GeneratedValue
+	@Column(name="CAT_SEQ_NO")
+	private long seqNo;
 	
-	private String cat_name;
+	@Column(name="NAME")
+	private String name;
 	
-	private String sub_cat_name;
+	@Column(name="PARENT_SEQ")
+	private long parentSeq; 
 	
-	private Integer cat_view_auth;
+	@Column(name="DEPTH")
+	private int depth;
 	
-	public Category(){};
-	
-	public Category(String cat_name) {
-		this.cat_name = cat_name;
-	}	
-	
-	
-	public int getCat_id() {
-		return cat_id;
+	@Column(name="LIST_SEQ")
+	private int listSeq;	
+
+	@Column(name="VIEW_FLAG")
+	private char viewFlag;
+
+	public long getSeqNo() {
+		return seqNo;
 	}
 
-	public void setCat_id(int cat_id) {
-		this.cat_id = cat_id;
+	public void setSeqNo(long seqNo) {
+		this.seqNo = seqNo;
 	}
 
-	public String getCat_name() {
-		return cat_name;
-	}
-	public void setCat_name(String cat_name) {
-		this.cat_name = cat_name;
-	}
-	public String getSub_cat_name() {
-		return sub_cat_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setSub_cat_name(String sub_cat_name) {
-		this.sub_cat_name = sub_cat_name;
-	}
-	public Integer getCat_view_auth() {
-		return cat_view_auth;
-	}
-	public void setCat_view_auth(Integer cat_view_auth) {
-		this.cat_view_auth = cat_view_auth;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Category [cat_name=" + cat_name + ", cat_view_auth=" + cat_view_auth + "]";
+	public long getParentSeq() {
+		return parentSeq;
 	}
 
+	public void setParentSeq(long parentSeq) {
+		this.parentSeq = parentSeq;
+	}
+
+	public int getDepth() {
+		return depth;
+	}
+
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+
+	public int getListSeq() {
+		return listSeq;
+	}
+
+	public void setListSeq(int listSeq) {
+		this.listSeq = listSeq;
+	}
+
+	public char getViewFlag() {
+		return viewFlag;
+	}
+
+	public void setViewFlag(char viewFlag) {
+		this.viewFlag = viewFlag;
+	}
+		
+	
 }
-
-

@@ -11,24 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.my.blog.domain.model.entity.Board;
-import com.my.blog.domain.model.entity.Category;
 import com.my.blog.domain.model.entity.Hello;
-import com.my.blog.infrastructure.dao.BoardDao;
-import com.my.blog.infrastructure.dao.CategoryDao;
 import com.my.blog.infrastructure.dao.HelloDao;
 
 @RestController
 public class HelloRestController {
 	@Autowired
 	private HelloDao helloDao;
-	
-	@Autowired
-	private BoardDao boardDao;
-	
-	@Autowired
-	private CategoryDao categoryDao;
-	
+
 /*	@Autowired
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;*/
@@ -75,35 +65,8 @@ public class HelloRestController {
 		return returnList;
 	}*/
 	
-	@RequestMapping("/test/view")
-	public Board testView(Model model){
-		
 
-		Board list = boardDao.findOne((long) 1);
-		
-	/*	if(list == null){
-			Board b = new Board();
-			b.setBd_title("없음");
-			
-			list.add(b);
-		}*/
-		
-		
-		return list;
-	}
-	
-	@RequestMapping("/test/cat")
-	public Category setCategory(Category category){
-		
-		Category catData = categoryDao.save(category);
-		
-		return catData;
-	}
-	@RequestMapping("/test/cat/all")
-	public List<Category> getCategory(){		
-		return categoryDao.findAll();
-	}
-	
+
 	@RequestMapping("/add")
 	public Hello Add(Hello hello){
 		
