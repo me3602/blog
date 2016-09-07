@@ -23,6 +23,9 @@ public class Category {
 	@Column(name="PARENT_SEQ")
 	private long parentSeq; 
 	
+	@Column(name="PARENT_NAME")
+	private String parentName; 
+	
 	@Column(name="DEPTH")
 	private int depth;
 	
@@ -56,6 +59,14 @@ public class Category {
 		this.parentSeq = parentSeq;
 	}
 
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
+	}
+
 	public int getDepth() {
 		return depth;
 	}
@@ -79,6 +90,14 @@ public class Category {
 	public void setViewFlag(char viewFlag) {
 		this.viewFlag = viewFlag;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [seqNo=" + seqNo + ", name=" + name + ", parentSeq=" + parentSeq + ", parentName=" + parentName
+				+ ", depth=" + depth + ", listSeq=" + listSeq + ", viewFlag=" + viewFlag + "]";
+	}
+
+	
 		
 	
 }

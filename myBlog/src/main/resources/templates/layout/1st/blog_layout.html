@@ -2,389 +2,211 @@
 <html xmlns:th="http://www.thymeleaf.org"
  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<title layout:title-pattern="$DECORATOR_TITLE :: $CONTENT_TITLE">My Blog</title>
+<title layout:title-pattern="$DECORATOR_TITLE :: $CONTENT_TITLE">Title</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="/webjars/bootstrap/3.3.5/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/css/blog_intro.css" />
+<link rel="stylesheet" href="/webjars/jquery-ui/1.9.2/css/smoothness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" href="/bootstrap-treeview-1.2.0/dist/bootstrap-treeview.min.css" />
+<style>
+html,body{width:100%;height:100%;background-color:#254E38}
+.nav{background-color:#254E38}
+@media screen and (min-width:992px){	
+	.wrap{height:100%;background-color:#254E38}
+	.wrap>div{height:100%}
+	.wrap>div>div{height:100%}	
+	.nav-top>button{border:0;background-color:#254E38}
+	.profile>.glyphicon{font-size:2em;color:#2E2E2E}
+	.profile>h1{color:#2E2E2E}
+	.nav-footer{position:absolute;bottom:0}
+	.footer-menu{padding-right:2em;color:#000}
+	.footer-menu>li>a{color:#FFF;font-size:1.4em}
+	.footer-menu>li>a:visited{color:#FFF;background-color:#254E38}
+	.footer-menu>li>a:active{color:#2E2E2E;background-color:#254E38}
+	.offcavas-main{position:relative;margin:0}
+	/*article*/
+	.article{padding-bottom:2em}
+	.article-subtitle{font-size:0.8em;color:#BDBDBD}
+	.article-subtitle>span{letter-spacing:1px}
+	.ellipsis{font-size:1.1em;line-height:1.5em;height:6em;overflow:hidden;text-overflow:ellipsis;-o-text-overflow:ellipsis;-ms-text-overflow:ellipsis;-webkit-line-clamp: 4;-webkit-box-orient: vertical;display: -webkit-box;}
+}
+@media screen and (min-width:992px) and (max-width:1199px){		
+	.nav-top{font-size:2em;color:#FFF} 
+	.offcavas{position:fixed;left:-20%;height:100%;background-color:#254E3}
+	.offcanvas-back-active{left:20%;opacity:0.8}
+	.nav-wrap{padding:1.5em 1em 5em 3em;height:100%}	
+	.contents{min-height:100%;background-color:#FFF}
+	.nav{height:60%;position:relative;}
+	.offcanvas-active{position:fixed;left:0%;height:100%;width:20%}		
+		
+}
+@media screen and (min-width:1200px){
+	.nav-top{font-size:2em;color:#FFF;margin-bottom:5em}
+	.offcavas{position:absolute;left:-20%;height:100%;background-color:#254E38}
+	.offcanvas-back-active{left:20%;opacity:0.8}
+	.nav-wrap{padding:1.5em 1em 5em 3em;height:100%}	
+	.contents{height:100%;background-color:#FFF;overflow:scroll;padding:5em 0 0 2em}
+	.nav{height:100%}
+	.offcanvas-active{position:absolute;left:0%;height:100%;width:20%}	
+	
+}
+@media screen and (max-width:991px){
+	.wrap{height:100%}
+	.wrap>div{height:100%}
+	.wrap>div>div{height:100%}	
+	.nav-top{font-size:2em;color:#FFF;padding:0.3em 1em 0.3em 1em} 
+	.nav-top>button{border:0;background-color:#254E38;padding-top:0.2em;}
+	.offcavas{position:fixed;left:-100%;top:58px;height:100%;background-color:#254E3}
+	.offcanvas-back-active{left:100%;opacity:0.8}
+	.nav-wrap{padding:0.5em 1em 5em 1em;height:100%;width:50%}	
+	.offcanvas-active{position:fixed;left:0%;height:100%;width:100%}	
+	.content-wrap{height:100%;position:relative}
+	.nav-footer{position:relative;}
+	.footer-menu{color:#000}
+	.footer-menu>li>a{color:#FFF;font-size:1.4em}
+	.footer-menu>li>a:visited{color:#FFF;background-color:#254E38}
+	.footer-menu>li>a:active{color:#2E2E2E;background-color:#254E38}
+	.profile>.glyphicon{font-size:2em;color:#2E2E2E}
+	.profile>h3{margin-top:10px;color:#2E2E2E}
+	.contents{margin-top:58px;min-height:100%;background-color:#FFF}
+	.ellipsis{font-size:1.1em;line-height:1.5em;height:6em;overflow:hidden;text-overflow:ellipsis;-o-text-overflow:ellipsis;-ms-text-overflow:ellipsis;-webkit-line-clamp: 4;-webkit-box-orient: vertical;display: -webkit-box;}
+}
+
+/*view*/
+.bbs_wrap{padding: 10px;margin-bottom: 20px}
+.view_top{border-left: 1px solid black;border-right: 1px solid black;padding: 0 10px 0 10px;width: 100%}
+.view_top>p>span {padding-right: 10px;font-size: 1.3em;color: #848484}
+.view_contents {margin-top: 30px;}
+.view_comment {margin-top: 30px;width: 100%;border-top: 2px dashed #BDBDBD;border-bottom: 2px dashed #BDBDBD}
+.comment {padding-bottom: 20px}	
+.other-row{margin-top: 2em}
+</style>
 </head>
 <body>
-<div class="progress">
-  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-    <span class="">Loading ....</span>
-  </div>
-</div>
-<!-- header(profile area)-->
-<div class="wrap" style="display:none;">
-<header class="container-fluid">
-	<div class="row">
-		<div class="header-top">
-			<h3 class="intro_title">Blog Title</h3>
-		</div>
-	</div>	
-	<div class="row">	
-		<div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 header-contents">		
-			<div class="profile_img">
-				<img src="http://blog.jinbo.net/attach/615/200937431.jpg" alt="프로필이미지" class="img-responsive img-rounded "/>	
+<div class="wrap">
+<!-- 크기별 분류 -->
+	<div class="visible-lg-block visible-md-block">			
+		<div id="offcanvasNav" class="offcavas">
+			<div class="nav-wrap">
+				<div id="tree"></div>
 			</div>
-			<div class="hidden-xs header_slide">
-				<h4>Hello</h4>
-				<div class="slide_text">
-					<div class="text_item">
-						<h2>text1text1text1</h2>
-					</div>
-					<div class="text_item">
-						<h2>text2text1text1</h2>
-					</div>						
-					<div class="text_item">
-						<h2>text3text1text1</h2>
-					</div>								
-				</div>
-			</div>
-			<div class="visible-xs header_slide_xs">
-				<h4>Hello</h4>
-				<button id="xs_profile_btn" class="btn btn-default btn-block">profile&nbsp;<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
-				<div class="slide_text_xs" style="display:none">
-					<div class="text_item_xs">
-						<h3>text1text1text1</h3>
-					</div>
-					<div class="text_item_xs">
-						<h3>text2text1text1</h3>
-					</div>						
-					<div class="text_item_xs">
-						<h3>text3text1text1</h3>
-					</div>													
-				</div>
-			</div>				
-		</div>
-	</div>
-</header>
-<!-- nav (navigation area) -->
-<nav class="navbar navbar-default navbar-inverse custom-nav">
-	<div class="container">
-		<div class="navbar-brand">
-			<span class="glyphicon glyphicon-leaf"></span>Brand
 		</div>		
-		<div class="visible-xs visible-sm">
-			<div class="pull-right">
-				<button type="button" id="nav_btn" class="navbar-toggle">
-					<span class="glyphicon glyphicon-list"></span>
-				</button>
-			</div>			
-		</div>	
-		<div class="hidden-xs">
-			<ul class="nav navbar-nav" th:each="root,info :${categoryRoots} ">
-				<li><a href="#" th:text="${root}" th:href="${'/blog/list/'+root}">Home</a></li>
-				<li class="dropdown" th:if="${info.count == info.size}">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-		          <ul class="dropdown-menu" role="menu">
-		            <li><a href="#">Action</a></li>
-		            <li><a href="#">Another action</a></li>
-		            <li><a href="#">Something else here</a></li>
-		            <li class="divider"></li>
-		            <li><a href="#">Separated link</a></li>
-		            <li class="divider"></li>
-		            <li><a href="#">One more separated link</a></li>
-		          </ul>
-		        </li>
-			</ul>
-			<form class="navbar-form navbar-right" role="search">
-		        <div class="form-group">
-		          <input type="text" class="form-control" placeholder="Search"/><button type="submit" class="btn btn-default">Submit</button>
-		        </div>		        
-      		</form>		
-		</div>
-	</div>
-	<div class="stacked_nav" style="display:none;">
-			<ul class="nav nav-pills nav-stacked" th:each="root,info :${categoryRoots} ">
-				<li><a href="#" th:text="${root}" th:href="${'/blog/list/'+root}">Home</a></li>
-				<li role="presentation" class="dropdown" th:if="${info.count == info.size}">
-				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-				      Dropdown <span class="caret"></span>
-				    </a>
-		            <ul class="dropdown-menu" role="menu">
-			            <li><a href="#">Action</a></li>
-			            <li><a href="#">Another action</a></li>
-			            <li><a href="#">Something else here</a></li>
-			            <li class="divider"></li>
-			            <li><a href="#">Separated link</a></li>
-			            <li class="divider"></li>
-			            <li><a href="#">One more separated link</a></li>
-		          	</ul>
-		        </li>
-			</ul>	
-			<div class="search_sm">
-        		<input type="text" placeholder="search"/><button><span class="glyphicon glyphicon-search"></span></button>
-        	</div>				
-		</div>
-</nav>
-<!-- section (contents area) -->
-<section class="container" layout:fragment="section">
-	<div class="row">
-		<div class="col-lg-9 col-md-9">
-			<div class="contents" layout:fragment="contents">
-				<div class="row">
-					<div class="col-lg-6 col-md-6">	
-						<article>
-							<img class="img-responsive center-block" src="http://www.kerry-beaches.com/images/contact-me-facebook-thumbnail.jpeg" />
-							<div class="article-title">
-								<h3>Title</h3>
-							</div>
-							<div class="article-footer">
-								<span>&nbsp;2015-12-08</span>
-								<span class="pull-right">
-									<span class="glyphicon glyphicon-comment">0</span>
-									<span class="glyphicon glyphicon-heart">0</span>
-								</span>								
-							</div>
-						</article>
+		<div id="contentWrap" class="row offcavas-main">							
+			<div class="col-lg-3 nav">
+				<div class="nav-wrap">
+					<!-- top -->
+					<div class="nav-top">
+						<button id="btnOffcanvas" class="glyphicon glyphicon-list pull-left"></button>						
+						<button class="glyphicon glyphicon-search pull-right"></button>
 					</div>
-					<div class="col-lg-6 col-md-6">	
-						<article>
-							<img class="img-responsive center-block" src="http://www.kerry-beaches.com/images/contact-me-facebook-thumbnail.jpeg" />
-							<div class="article-title">
-								<h3>Title</h3>
-							</div>
-							<div class="article-footer">
-								<span>&nbsp;2015-12-08</span>
-								<span class="pull-right">
-									<span class="glyphicon glyphicon-comment">0</span>
-									<span class="glyphicon glyphicon-heart">0</span>
-								</span>								
-							</div>
-						</article>
+					<!-- profile -->
+					<div class="profile text-center">
+						<span class="glyphicon glyphicon-console"></span>						
+						<h1>Layout<br/><small>Secondary text</small></h1>
+						<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140"/>
 					</div>
-					<div class="col-lg-6 col-md-6">	
-						<article>
-							<img class="img-responsive center-block" src="http://www.kerry-beaches.com/images/contact-me-facebook-thumbnail.jpeg" />
-							<div class="article-title">
-								<h3>Title</h3>
-							</div>
-							<div class="article-footer">
-								<span>&nbsp;2015-12-08</span>
-								<span class="pull-right">
-									<span class="glyphicon glyphicon-comment">0</span>
-									<span class="glyphicon glyphicon-heart">0</span>
-								</span>								
-							</div>
-						</article>
+					<!-- nav-footer -->
+					<div class="nav-footer">
+						<ul class="nav nav-pills nav-justified footer-menu">
+						  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-bookmark"></span></a></li>
+						  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-question-sign"></span></a></li>
+						  <li role="presentation"><a href="#"><span class="glyphicon glyphicon-info-sign"></span></a></li>
+						</ul>
 					</div>
-					<div class="col-lg-6 col-md-6">	
-						<article>
-							<img class="img-responsive center-block" src="http://www.kerry-beaches.com/images/contact-me-facebook-thumbnail.jpeg" />
-							<div class="article-title">
-								<h3>Title</h3>
-							</div>
-							<div class="article-footer">
-								<span>&nbsp;2015-12-08</span>
-								<span class="pull-right">
-									<span class="glyphicon glyphicon-comment">0</span>
-									<span class="glyphicon glyphicon-heart">0</span>
-								</span>								
-							</div>
-						</article>
-					</div>
-					<div class="col-lg-6 col-md-6">	
-						<article>
-							<img class="img-responsive center-block" src="http://www.kerry-beaches.com/images/contact-me-facebook-thumbnail.jpeg" />
-							<div class="article-title">
-								<h3>Title</h3>
-							</div>
-							<div class="article-footer">
-								<span>&nbsp;2015-12-08</span>
-								<span class="pull-right">
-									<span class="glyphicon glyphicon-comment">0</span>
-									<span class="glyphicon glyphicon-heart">0</span>
-								</span>								
-							</div>
-						</article>
-					</div>
-					<div class="col-lg-6 col-md-6">	
-						<article>
-							<img class="img-responsive center-block" src="http://www.kerry-beaches.com/images/contact-me-facebook-thumbnail.jpeg" />
-							<div class="article-title">
-								<h3>Title</h3>
-							</div>
-							<div class="article-footer">
-								<span>&nbsp;2015-12-08</span>
-								<span class="pull-right">
-									<span class="glyphicon glyphicon-comment">0</span>
-									<span class="glyphicon glyphicon-heart">0</span>
-								</span>								
-							</div>
-						</article>
-					</div>
-					<div class="col-lg-12 col-md-12">
-						 <ul class="pagination">
-						    <li>
-						      <a href="#" aria-label="Previous">
-						        <span aria-hidden="true">&laquo;</span>
-						      </a>
-						    </li>
-						    <li><a href="#">1</a></li>
-						    <li><a href="#">2</a></li>
-						    <li><a href="#">3</a></li>
-						    <li><a href="#">4</a></li>
-						    <li><a href="#">5</a></li>
-						    <li>
-						      <a href="#" aria-label="Next">
-						        <span aria-hidden="true">&raquo;</span>
-						      </a>
-						    </li>
-						  </ul>
+				</div>							
+			</div>
+				<div class="col-lg-9 contents" >
+					<div class="container">
+						<div class="row" layout:fragment="contents"></div>						
 					</div>
 				</div>
-			</div>					
-		</div>	
-		<div class="col-lg-3 col-md-3">
-			<aside>
-				<p>Category </p> <!-- 현재 카테고리 최근 글 5개 -->
-				<ul>
-					<li><h4><span class="glyphicon glyphicon-console"></span>&nbsp;Category1</h4></li>
-					<li><h4><span class="glyphicon glyphicon-console"></span>&nbsp;Category1</h4></li>	
-					<li><h4><span class="glyphicon glyphicon-console"></span>&nbsp;Category1</h4></li>
-					<li><h4><span class="glyphicon glyphicon-console"></span>&nbsp;Category1</h4></li>
-					<li><h4><span class="glyphicon glyphicon-console"></span>&nbsp;Category1</h4></li>
-				</ul>
-			</aside>	
-			<aside>
-				<p>Recent Post</p> <!-- 전체 글 중 최근글 5개 -->
-				<ul>
-					<li><h4>Title<span class="pull-right">2015-12-08</span></h4></li>
-					<li><h4>Title<span class="pull-right">2015-12-08</span></h4></li>
-					<li><h4>Title<span class="pull-right">2015-12-08</span></h4></li>
-					<li><h4>Title<span class="pull-right">2015-12-08</span></h4></li>
-				</ul>
-			</aside>
-			<aside>
-				<p>Recent Comment</p> <!-- 전체 댓글 중 최근댓글 5개 -->
-				<ul>
-					<li><h4>Title<span class="pull-right">2015-12-08</span></h4></li>
-					<li><h4>Title<span class="pull-right">2015-12-08</span></h4></li>
-					<li><h4>Title<span class="pull-right">2015-12-08</span></h4></li>
-					<li><h4>Title<span class="pull-right">2015-12-08</span></h4></li>
-				</ul>
-			</aside>	
-			<aside>
-				<p>Links</p> <!-- 각종 사이트 링크 -->
-				<ul>
-					<li><h4><span class="glyphicon glyphicon-console"></span>&nbsp;Category1</h4></li>
-					<li><h4><span class="glyphicon glyphicon-console"></span>&nbsp;Category1</h4></li>	
-					<li><h4><span class="glyphicon glyphicon-console"></span>&nbsp;Category1</h4></li>
-					<li><h4><span class="glyphicon glyphicon-console"></span>&nbsp;Category1</h4></li>
-					<li><h4><span class="glyphicon glyphicon-console"></span>&nbsp;Category1</h4></li>
-					<li><h4><span class="glyphicon glyphicon-console"></span>&nbsp;Category1</h4></li>	
-				</ul>
-			</aside>		
-		</div>	
-	</div>	
-</section>
-
-<footer class="container-fluid">
-	<div class="footer-contents">
-		<h3><span class="glyphicon glyphicon-chevron-up"></span></h3>
-		<h3>블로그 개발 중</h3>
+		</div>
 	</div>
-	<div class="footer-bottom">
-		<h6>Copyright © 2015 All Rights Reserved.</h6>
-	</div>	
-</footer>
+	<div class="visible-sm-block visible-xs-block">
+		<div id="offcanvasNav" class="offcavas">		
+			<div class="nav-wrap">
+				<div class="profile text-center">						
+					<h3>Layout</h3>
+					<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="80" height="80"/>
+				</div>
+				<div id="tree"></div>
+			</div>
+		
+		</div>	
+		<div id="contentWrap" class="content-wrap">
+			<div class="navbar navbar-default navbar-fixed-top nav">
+			  	<div class="nav-top text-center">
+					<button id="btnOffcanvas" class="glyphicon glyphicon-list pull-left"></button>
+					<span>Layout</span>
+					<button class="glyphicon glyphicon-search pull-right"></button>
+				</div>
+			</div>
+				<div class="contents" >
+					<div class="container" layout:fragment="sm-contents"></div>
+				</div>			
+		</div>
+	</div>
 </div>
-<!-- bootstrap script -->
+
+
+
 <script src="/webjars/jquery/2.1.4/dist/jquery.min.js"></script>
+<script src="/webjars/jquery-ui/1.9.2/js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="/webjars/bootstrap/3.3.5/dist/js/bootstrap.min.js"></script>
-<script>
-	var slider
+<script src="/bootstrap-treeview-1.2.0/dist/bootstrap-treeview.min.js"></script>
+<div layout:fragment="lib"></div>
+<script th:inline="javascript">
+/*<![CDATA[*/     
+           
+    $(document).ready(function(){
+    	$('button#btnOffcanvas').on('click',function(){	
+    		$('div#offcanvasNav').toggleClass('offcanvas-active','swing');
+    		$('div#contentWrap').toggleClass('offcanvas-back-active','swing');
+    	});
+    	
+    	$('div#tree').treeview({
+    		data:getTree()
+    		,backColor: '#254E38'
+    		,borderColor: '#254E38'
+    		,color: '#FFF'
+    		,onhoverColor: '#428bca'
+    		,selectedBackColor: '#428bca'
+    		,selectedColor: '#000'
+    		,enableLinks: true
+    		//,showTags: true
+    		});
+    });
+           
 	
-	$(document).ready(function(){	
-		//xs 시 profile 노출 버튼
-		var profile_btn = false;
-		$('#xs_profile_btn').on('click',function(){
-			$('.slide_text_xs').toggle('fast',function(){
-				if(!profile_btn){
-					$('#xs_profile_btn').html('profile&nbsp;<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>');
-					profile_btn = true;
-				}else{
-					$('#xs_profile_btn').html('profile&nbsp;<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>');
-					profile_btn = false;
+	var catList = [[${CATEGORY}]];
+	function getTree(){
+		
+		var data = new Array(); // array for return
+		var treeObj; // obj for push in return array
+		var length = catList.length;
+		for(var i=0; i<length; i++){
+			var dataObj= catList[i];
+			
+			if(dataObj.parentSeq == 0){	//root category	
+				if(i != 0){ //if not first obj, push obj in data array
+					data.push(treeObj);
 				}
-				
-			});
-		}); 
-		
-		//nav 노출 버튼
-		$('#nav_btn').on('click',function(){
-			$('.stacked_nav').slideToggle();
-		});
-		
-		
-		
-		//aside hover event
-		$('aside > ul > li').on('mouseenter mouseleave',function(event){
-			switch(event.type){
-			case('mouseenter'):
-				$(this).animate({'padding-left':'15px'},'fast','swing');
-				break;
-			case('mouseleave'):
-				$(this).animate({'padding-left':'0px'},'fast','swing');
-				break;
+				treeObj = new Object();
+				treeObj.text = dataObj.name;
+				treeObj.state = {'expanded': false};
+			}else{ //child category
+				if(treeObj.nodes == undefined) treeObj.nodes = new Array();		
+				treeObj.nodes.push({'text': dataObj.name, 'href': '/blog/list/'+dataObj.seqNo});
 			}
 			
-		});
-		
-		//loading event
-		$('.progress').hide();
-		$('.wrap').fadeIn('slow');
-		
-		//header slide		
-		var fullSizeWidth = $(window).width();
-		setSlideWidth(fullSizeWidth);	
-		
-		//fixed nav setting		
-		var headerSizeHeight = $('header').height();
-		
-		$(window).resize(function(){
-			fullSizeWidth = $(this).width();	
-			setSlideWidth(fullSizeWidth);
-			
-			headerSizeHeight = $('header').height();
-		});		
-		
-		$(window).scroll(function(){
-			var curScroll = $(document).scrollTop();
-			if(curScroll > headerSizeHeight){
-				$('nav').addClass('navbar-fixed-top');
-			}else{
-				$('nav').removeClass('navbar-fixed-top');
-			}
-		});
-	});
-	
-	function setSlideWidth(width){
-		if(typeof(slider) != 'undefined'){
-			clearInterval(slider);
-		}
-		//margin-left의 값이 0 이면 -아이템사이즈를 더함, 최대치이면 반대로 뺌			
-		var flag = false;
-		var itemSizeWidth = $('.header_slide').width();
-		$('.slide_text').css('width',itemSizeWidth*3);
-		$('.text_item').css('width',itemSizeWidth);
-		
-		slider = setInterval(function(){			
-			var currentMargin = Number($('.slide_text').css('margin-left').replace('px',''));			
-			var changeMargin;
-			
-			if((Math.abs(currentMargin)+itemSizeWidth) >= itemSizeWidth*3){	
-				flag = true;
-			}else if((currentMargin + itemSizeWidth) > 0){
-				flag = false;
+			if(i == (length-1)){
+				data.push(treeObj);
 			}			
-			changeMargin = (flag)? changeMargin = currentMargin + itemSizeWidth : changeMargin = currentMargin - itemSizeWidth;
-			$('.slide_text').animate({'margin-left':changeMargin+'px'},'fast','swing');
-		}, 2000); 
+		}		 
+		return data;
 	};
-	
+/*]]>*/
 </script>
 <script layout:fragment="custom-script"></script>
 </body>

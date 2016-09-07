@@ -1,14 +1,19 @@
 package com.my.blog.domain.model.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * @author paxnet
+ *
+ */
 @Entity
 @Table(name="BOARD")
 public class Board {
@@ -26,14 +31,23 @@ public class Board {
 	@Column(name="TITLE")
 	private String title;
 	
-	@Column(name="contents", columnDefinition="mediumtext")
+	@Column(name="CONTENTS", columnDefinition="mediumtext")
 	private String contents;
 	
-	@Column(name="hit")
+	@Column(name="HIT")
 	private int hit;
+	
+	@Column(name="REG_DATE",  columnDefinition="datetime")
+	private Date regDate;
+	
+	@Column(name="MOD_DATE",  columnDefinition="datetime")
+	private Date modDate;
 	
 	@Column(name="NOTICE_FLAG")
 	private char noticeFlag;
+	
+	@Column(name="VIEW_FLAG")
+	private char viewFlag;
 	
 	@ManyToOne
 	@JoinColumn(name="CAT_SEQ_NO")
@@ -87,12 +101,36 @@ public class Board {
 		this.hit = hit;
 	}
 
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
+	public Date getModDate() {
+		return modDate;
+	}
+
+	public void setModDate(Date modDate) {
+		this.modDate = modDate;
+	}
+
 	public char getNoticeFlag() {
 		return noticeFlag;
 	}
 
 	public void setNoticeFlag(char noticeFlag) {
 		this.noticeFlag = noticeFlag;
+	}
+	
+	public char getViewFlag() {
+		return viewFlag;
+	}
+
+	public void setViewFlag(char viewFlag) {
+		this.viewFlag = viewFlag;
 	}
 
 	public Category getCategory() {
@@ -101,6 +139,14 @@ public class Board {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	@Override
+	public String toString() {
+		return "Board [seqNo=" + seqNo + ", userId=" + userId + ", userNick=" + userNick + ", title=" + title
+				+ ", contents=" + contents + ", hit=" + hit + ", regDate=" + regDate.toString() + ", modDate=" + modDate.toString()
+				+ ", noticeFlag=" + noticeFlag + ", viewFlag=" + viewFlag 
+				+ ", category=" + category.toString() + "]";
 	}
 	
 	

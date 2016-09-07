@@ -9,6 +9,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.my.blog.domain.model.entity.Category;
+import com.my.blog.domain.model.entity.Board;
 import com.my.blog.presentation.Service.BlogService;
 
 @RestController
@@ -43,11 +46,35 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value = "/list/{mode}")
-	public ModelAndView getBlogList(ModelAndView mav, @PathVariable String mode, Category c){
+	public ModelAndView getBlogList(ModelAndView mav
+			, @PathVariable String mode
+			, @PageableDefault(sort={"seqNo"}, direction=Direction.DESC, size=10) Pageable pageable){
 		//DB에서 블로그 스킨 조회
 		String skin = "1st";
 		
+		mav.addObject("CATEGORY", blogService.getCategory());
 		
+		if(mode.equals("intro")) mav.addObject("LIST", blogService.getIntroBoardList(pageable));
+		else  mav.addObject("LIST", blogService.getBoardList(mode,pageable));
+		
+	
+		
+		mav.setViewName("blog/skin/"+ skin +"/list");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/view/{seqno}")
+	public ModelAndView getBlogView(ModelAndView mav
+			, @PathVariable String seqno
+			, @PageableDefault(sort={"seqNo"}, direction=Direction.DESC, size=1) Pageable pageable){
+		//DB에서 블로그 스킨 조회
+		String skin = "1st";
+		
+		mav.addObject("CATEGORY", blogService.getCategory());		
+		mav.addObject("BOARD", blogService.getBoardView(seqno));
+	
+		
+		mav.setViewName("blog/skin/"+ skin +"/view");
 		return mav;
 	}
 	
