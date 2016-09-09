@@ -11,7 +11,10 @@
 <link rel="stylesheet" href="/bootstrap-treeview-1.2.0/dist/bootstrap-treeview.min.css" />
 <style>
 html,body{width:100%;height:100%;background-color:#254E38}
+li{list-style-type:none}
 .nav{background-color:#254E38}
+.view-other>li{padding:0.3em;font-size:1.2em}
+.view-other>li:hover{background-color:#d9edf7}
 @media screen and (min-width:992px){	
 	.wrap{height:100%;background-color:#254E38}
 	.wrap>div{height:100%}
@@ -81,6 +84,9 @@ html,body{width:100%;height:100%;background-color:#254E38}
 .view_comment {margin-top: 30px;width: 100%;border-top: 2px dashed #BDBDBD;border-bottom: 2px dashed #BDBDBD}
 .comment {padding-bottom: 20px}	
 .other-row{margin-top: 2em}
+
+/*helper*/
+.info-text{padding: 1em}
 </style>
 </head>
 <body>
@@ -173,6 +179,7 @@ html,body{width:100%;height:100%;background-color:#254E38}
     		,onhoverColor: '#428bca'
     		,selectedBackColor: '#428bca'
     		,selectedColor: '#000'
+    		,emptyIcon: 'glyphicon glyphicon-minus'
     		,enableLinks: true
     		//,showTags: true
     		});
@@ -190,6 +197,9 @@ html,body{width:100%;height:100%;background-color:#254E38}
 			
 			if(dataObj.parentSeq == 0){	//root category	
 				if(i != 0){ //if not first obj, push obj in data array
+					if(treeObj.nodes == undefined){
+						treeObj.href = '/blog/list/'+catList[i-1].seqNo;
+					}
 					data.push(treeObj);
 				}
 				treeObj = new Object();

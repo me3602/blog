@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/1st/blog_layout">
+<head>
+<title>intro</title>
+</head>
+<body>
+<div layout:fragment="contents">
+<!-- gt md -->
+<th:block th:if="${not #strings.contains(LIST,'UNKNOWN')}">
+	<div class="article col-lg-9" th:each="list : ${LIST}">	<!-- th:each="i : ${#numbers.sequence( 1, 10)}" -->	
+		<h3><strong th:text="${list.title}">Title</strong></h3>
+		<p class="article-subtitle">
+			<span>
+				<i class="glyphicon glyphicon-time"></i>
+				<strong th:text="${#dates.format(list.regDate,'yyyy-MM-dd HH:mm:ss')}">2016-03-31 13:00:00</strong>
+			</span>			
+			<span>
+				<i class="glyphicon glyphicon-user"></i>
+				<strong th:text="'Posted by '+${list.userNick}">Posted by Nick</strong>
+			</span>			
+			<span>
+				<i class="glyphicon glyphicon-tags"></i>
+				<string th:text="${list.category.parentName != 'root'}? 
+				${list.category.parentName}+', '+${list.category.name} :
+				${list.category.name}">Category</string>
+				
+			</span>			
+			<!-- <span>
+				<i class="glyphicon glyphicon-comment"></i>
+				<strong>0 Comments</strong>
+			</span>	 -->		
+		</p>
+		<hr/>
+		<div class="article-contents">
+			<div class="row">
+				<div class="col-lg-3 col-md-3">
+					<img class="img-responsive img-thumbnail" src="/image/default.jpg"/>
+				</div>
+				<div class="col-lg-9 col-md-9">
+					<p class="ellipsis" th:text="${list.contents}">
+					Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+					Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.
+					Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta gravida at eget metus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+					</p>
+					<a class="btn btn-primary pull-right" href="#" role="button" th:href="'/blog/view/'+${list.category.seqNo}+'/'+${list.seqNo}">Read More</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>
+<th:block th:if="${#strings.contains(LIST,'UNKNOWN')}">
+	<div class="article col-lg-9">
+		<th:block th:if="${#strings.equals(CURRENT_CATEGORY.parentName,'root')}">
+			<div class="panel panel-danger">
+				<div class="panel-body">
+				    <h3 class="bg-danger text-center info-text">잘 못된 접근입니다.<br/><small></small></h3>
+					<button type="button" class="btn btn-primary center-block" onclick="history.back();">뒤로가기</button>
+				</div>
+			</div>			
+		</th:block>
+		<th:block th:if="${not #strings.equals(CURRENT_CATEGORY.parentName,'root')}">
+			<div class="panel panel-info">
+				<div class="panel-body">
+				    <h3 class="bg-info text-center info-text">게시글이 없습니다.<br/><small>혹은 준비중입니다.</small></h3>
+				    <button type="button" class="btn btn-primary center-block" onclick="history.back();">뒤로가기</button>
+				</div>
+			</div>
+		</th:block>
+	</div>
+</th:block>
+</div>
+
+<div layout:fragment="sm-contents">
+<!-- lt sm -->
+<th:block th:if="${not #strings.contains(LIST,'UNKNOWN')}">
+	<div class="article col-lg-9" th:each="list : ${LIST}">	<!-- th:each="i : ${#numbers.sequence( 1, 10)}" -->	
+		<h3><strong th:text="${list.title}">Title</strong></h3>
+		<p class="article-subtitle">
+			<span>
+				<i class="glyphicon glyphicon-time"></i>
+				<strong th:text="${#dates.format(list.regDate,'yyyy-MM-dd HH:mm:ss')}">2016-03-31 13:00:00</strong>
+			</span>			
+			<span>
+				<i class="glyphicon glyphicon-user"></i>
+				<strong th:text="'Posted by '+${list.userNick}">Posted by Nick</strong>
+			</span>			
+			<span>
+				<i class="glyphicon glyphicon-tags"></i>
+				<string th:text="${list.category.parentName != 'root'}? 
+				${list.category.parentName}+', '+${list.category.name} :
+				${list.category.name}">Category</string>
+				
+			</span>			
+			<!-- <span>
+				<i class="glyphicon glyphicon-comment"></i>
+				<strong>0 Comments</strong>
+			</span>	 -->		
+		</p>
+		<hr/>
+		<div class="article-contents">
+			<div class="row">
+				<div class="col-lg-3 col-md-3">
+					<img class="img-responsive img-thumbnail" src="/image/default.jpg"/>
+				</div>
+				<div class="col-lg-9 col-md-9">
+					<p class="ellipsis">
+					Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+					Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.
+					Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta gravida at eget metus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+					</p>
+					<a class="btn btn-primary pull-right" href="#" th:href="'/blog/view/'+${list.category.seqNo}+'/'+${list.seqNo}" role="button">Read More</a>
+				</div>
+			</div>
+		</div>		
+	</div>
+</th:block>
+<th:block th:if="${#strings.contains(LIST,'UNKNOWN')}">
+	<div class="article col-lg-9">
+		<th:block th:if="${#strings.equals(CURRENT_CATEGORY.parentName,'root')}">
+			<div class="panel panel-danger">
+				<div class="panel-body">
+				    <h3 class="bg-danger text-center info-text">잘 못된 접근입니다.<br/><small></small></h3>
+					<button type="button" class="btn btn-primary center-block" onclick="history.back();">뒤로가기</button>
+				</div>
+			</div>			
+		</th:block>
+		<th:block th:if="${not #strings.equals(CURRENT_CATEGORY.parentName,'root')}">
+			<div class="panel panel-info">
+				<div class="panel-body">
+				    <h3 class="bg-info text-center info-text">게시글이 없습니다.<br/><small>혹은 준비중입니다.</small></h3>
+				    <button type="button" class="btn btn-primary center-block" onclick="history.back();">뒤로가기</button>
+				</div>
+			</div>
+		</th:block>
+	</div>
+</th:block>
+
+	<!-- <div class="article" th:each="list : ${LIST}">	th:each="i : ${#numbers.sequence( 1, 10)}"	
+		<h3><strong>Title</strong></h3>
+		<p class="article-subtitle">
+			<span>
+				<i class="glyphicon glyphicon-time"></i>
+				<strong>2016-03-31 13:00:00</strong>
+			</span>			
+			<span>
+				<i class="glyphicon glyphicon-user"></i>
+				<strong>Posted by IDTEST</strong>
+			</span>			
+			<span>
+				<i class="glyphicon glyphicon-tags"></i>
+				<strong>Java,Spring</strong>
+			</span>			
+			<span>
+				<i class="glyphicon glyphicon-comment"></i>
+				<strong>0 Comments</strong>
+			</span>			
+		</p>
+		<hr/>
+		<div class="article-contents">
+			<div class="row">
+				<div class="col-lg-3 col-md-3">
+					<img class="img-responsive img-thumbnail" src="/image/default.jpg"/>
+				</div>
+				<div class="col-lg-9 col-md-9">
+					<p class="ellipsis">
+					Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+					Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.
+					Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta gravida at eget metus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+					</p>
+					<a class="btn btn-primary pull-right" href="#" role="button">Read More</a>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	
+</div>
+</body>
+</html>

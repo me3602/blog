@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/1st/blog_layout">
+<head>
+<title>write</title>
+</head>
+<body>
+<div layout:fragment="contents">
+<div class="col-lg-9">
+		<h3>글쓰기</h3>
+		<hr/>
+		<ul class="write-drop">
+			<li class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" id="writeCategory" data-toggle="dropdown" aria-expanded="true">
+					<span id="categoryTitle">카테고리</span>
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="writeCategory">
+					<li th:each="root,info :${categoryRoots}">	
+						<!-- <a th:text="${root}">${root}</a>	 -->			
+						<a tabindex="-1" href="#" th:if="${root.cat_view_auth != 3}" th:text="${root.cat_name}" th:href="'javascript:selectCategoty(\''+${root.cat_id}+'\',\''+${root.cat_name}+'\');'">Category1</a>
+					</li>
+			  	</ul>
+			</li>
+		</ul>
+		
+		<ul id="subCategoryList" class="write-drop" style="display:none">
+			<li class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" id="writeCategory" data-toggle="dropdown" aria-expanded="true">
+					<span id="subCategoryTitle">서브 카테고리</span>
+					<span class="caret"></span>
+				</button>
+				<ul id="sublist" class="dropdown-menu" aria-labelledby="writeCategory"></ul>				
+			</li>
+		</ul>
+	<hr/>
+	<form name="write_form" class="form-horizontal" th:action="@{/blog/write/reg}" method="post" enctype="multipart/form-data">
+	<!-- 	<input type="hidden" name="category" value=""/> -->
+		<input type="hidden" name="category" value=""/>
+		<div class="form-group">
+		    <label for="bdTitle" class="col-sm-2 control-label text-center"><p class="text-center">제 목</p></label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" name="bd_title" id="bdTitle" placeholder="Title"/>
+		    </div>
+	 	</div>	
+	 	<div class="form-group">
+		    <label for="bdWriter" class="col-sm-2 control-label text-center"><p class="text-center">글쓴이</p></label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" name="bd_writer" id="bdWriter" value="me3602" readonly="readonly"/>
+		    </div>
+	 	</div>	
+	 	<textarea id="summernote" name="bd_contents"></textarea>
+		<button type="submit" class="btn btn-primary pull-right">Submit</button>
+	</form>
+</div>
+</div>
+<div layout:fragment="lib">
+	<link rel="stylesheet" href="/webjars/summernote/0.8.1/dist/summernote.css" />
+	<link rel="stylesheet" href="/webjars/syntaxhighlighter/3.0.83/styles/shCoreMidnight.css" />
+	<script src="/webjars/summernote/0.8.1/dist/summernote.min.js"></script>
+	<script src="/webjars/summernote/0.8.1/dist/lang/summernote-ko-KR.js"></script>
+	<script src="/webjars/syntaxhighlighter/3.0.83/scripts/XRegExp.js"></script>
+	<script src="/webjars/syntaxhighlighter/3.0.83/scripts/shCore.js"></script>	
+	<script src="/webjars/syntaxhighlighter/3.0.83/scripts/shAutoloader.js"></script>
+	<script>
+	//<![CDATA[
+	    var arrSH = ['js'];
+		SyntaxHighlighter.autoloader(
+			'js javscript /webjars/syntaxhighlighter/3.0.83/scripts/shBrushJScript.js'		
+		);
+		SyntaxHighlighter.config.bloggerMode = true;
+		SyntaxHighlighter.all();
+	//]]>
+	</script>
+</div>
+<script layout:fragment="custom-script">
+//<![CDATA[
+	$(document).ready(function(){
+		$('#summernote').summernote({	
+			toolbar: [
+                   ['style', ['style']],
+                   ['', ['bold', 'underline', 'clear']],
+                   ['fontname', ['fontname']],
+                   ['color', ['color']],
+                   ['para', ['ul', 'ol', 'paragraph']],
+                   ['table', ['table']],
+                   ['insert', ['link', 'picture', 'video']],
+                   ['view', ['fullscreen', 'codeview', 'help']],
+                   ['para', ['syntaxhighlighter']],
+            ],
+            buttons: {
+            	syntaxhighlighter: Sytaxhighlighter
+            },
+			lang: 'ko-KR',
+			height:'500px',
+			focus:true,
+			callbacks : {
+				onImageUpload:function(files){
+					sendFile(files[0]);
+					//console.log(files[0]);
+				},
+				onInit:function(){
+					
+				}
+			}
+		});		
+	});	
+	
+/*SH List Set*/	
+	var makeSHBtn = function(arr,ui){
+		var arrFunc = [];
+		for(index in arr){
+			arrFunc[index] = ui.button({
+				className: 'note-btn btn btn-default btn-sm',
+			    contents: arr[index],
+			    tooltip: arr[index]+' syntax highlighter'
+			})
+		}
+		return arrFunc;
+	};
+ 
+	var SHlist = function(context){
+		var ui = $.summernote.ui;
+		
+		// create button		
+		var button = ui.buttonGroup(makeSHBtn(arrSH,ui));
+		
+		return button.render();// return button as jquery object 
+	}
+	
+	var Sytaxhighlighter = function (context) {
+		var ui = $.summernote.ui;
+		  
+		// create button		
+		var button = ui.buttonGroup([
+			ui.button({
+				className: 'dropdown-toggle',
+			    contents: 'SH<span class="note-icon-caret"></span>',
+			    tooltip: 'syntax highlighter',
+			    data:{
+			    	toggle : 'dropdown'
+			    }
+			}),
+			ui.dropdown({
+				className : 'dropdown-menu',
+				contents : SHlist,
+				callback: function ($dropdown) {     
+                   $dropdown.find('button').each(function () {
+                        $(this).click(function(){  
+                        	var pre = document.createElement('pre');
+                        	$(pre).addClass('brush:js sh'); 
+                        	$(pre).html("<p></p>");
+                            $('#summernote').summernote('insertNode', pre);
+                        });
+                    }); 
+                }
+			})
+		]);
+
+		return button.render();   // return button as jquery object 
+	};
+/*SH List Set*/	
+	
+	function selectCategoty(id,name){
+		//$('input[name=category]').val(id);
+		$('#categoryTitle').text(name);
+		$.get('/blog/json/subMenu/'+name,{},function(data){	
+			var subList = '';
+			console.log(data);
+			for(index in data){
+				var subId = data[index].cat_id;
+				var subName = data[index].sub_cat_name;
+				subList += '<li><a tabindex="-1" href="javascript:selectSubCategory(\''+subId+'\',\''+subName+'\');">'+subName+'</a></li>';				
+			}	
+			$('#sublist').html(subList);
+		});		
+		$('#subCategoryList').show();
+	};
+	
+	function selectSubCategory(subId,subName){
+		$('input[name=category]').val(subId);
+		$('#subCategoryTitle').text(subName);
+	};
+	
+	function sendFile(file) {
+	    var form = new FormData();
+	    form.append("file", file);
+	   	$.ajax({
+	        data : form,
+	        type : "POST",
+	        url : "/blog/upload/image",
+	        cache : false,
+	        contentType : false,
+	        processData : false,
+	        success : function(data) {
+	            var json = data;
+	            if(json.result == "SUCC"){
+	            	$('#summernote').summernote('insertImage', '/image/temp/'+json.filename, json.filename);
+	            }else{
+	            	alert("이미지 업로드 실패");
+	            }	           
+	        }
+	    });
+	};
+//]]>
+</script>
+</body>
+</html>

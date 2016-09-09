@@ -84,10 +84,19 @@ public class BlogService {
 	public List<Category> getCategory(){		
 		return categoryDAO.findByViewFlag('Y', new Sort(Sort.Direction.ASC, "listSeq", "depth"));
 	}
+	
+	public Category getCurrentCategory(String mode){
+		return categoryDAO.findBySeqNo(Long.parseLong(mode));
+	}
 
 
 	public Board getBoardView(String seqno) {		
 		return boardDAO.findOne(Long.parseLong(seqno));
+	}
+
+
+	public List<Object[]> getBoardSimpleList(String catSeqNo) {
+		return boardDAO.findBoardSimpleList(Long.parseLong(catSeqNo));
 	}
 	
 		

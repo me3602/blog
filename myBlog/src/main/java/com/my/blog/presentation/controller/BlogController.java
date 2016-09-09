@@ -52,7 +52,11 @@ public class BlogController {
 		//DB에서 블로그 스킨 조회
 		String skin = "1st";
 		
+		//메뉴 
 		mav.addObject("CATEGORY", blogService.getCategory());
+		
+		//현재 메뉴
+		mav.addObject("CURRENT_CATEGORY", blogService.getCurrentCategory(mode));
 		
 		if(mode.equals("intro")) mav.addObject("LIST", blogService.getIntroBoardList(pageable));
 		else  mav.addObject("LIST", blogService.getBoardList(mode,pageable));
@@ -63,16 +67,21 @@ public class BlogController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/view/{seqno}")
+	@RequestMapping(value = "/view/{catSeqNo}/{seqno}")
 	public ModelAndView getBlogView(ModelAndView mav
+			, @PathVariable String catSeqNo
 			, @PathVariable String seqno
 			, @PageableDefault(sort={"seqNo"}, direction=Direction.DESC, size=1) Pageable pageable){
 		//DB에서 블로그 스킨 조회
 		String skin = "1st";
 		
-		mav.addObject("CATEGORY", blogService.getCategory());		
+		//메뉴
+		mav.addObject("CATEGORY", blogService.getCategory());
+		
+		//현재글
 		mav.addObject("BOARD", blogService.getBoardView(seqno));
-	
+		mav.addObject("LIST", blogService.getBoardSimpleList(catSeqNo));		
+		
 		
 		mav.setViewName("blog/skin/"+ skin +"/view");
 		return mav;
