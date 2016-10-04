@@ -15,28 +15,16 @@
 				<button class="btn btn-default dropdown-toggle" type="button" id="writeCategory" data-toggle="dropdown" aria-expanded="true">
 					<span id="categoryTitle">카테고리</span>
 					<span class="caret"></span>
-				</button>
+				</button>				
 				<ul class="dropdown-menu" aria-labelledby="writeCategory">
-					<li th:each="root,info :${categoryRoots}">	
-						<!-- <a th:text="${root}">${root}</a>	 -->			
-						<a tabindex="-1" href="#" th:if="${root.cat_view_auth != 3}" th:text="${root.cat_name}" th:href="'javascript:selectCategoty(\''+${root.cat_id}+'\',\''+${root.cat_name}+'\');'">Category1</a>
+					<li th:each="category :${CATEGORY}">			
+						<a tabindex="-1" href="#" th:if="${category.parentName != 'root'}" th:text="${category.name}" th:href="'javascript:selectCategoty('+${category.seqNo}+',\''+${category.name}+'\');'">Category1</a>
 					</li>
 			  	</ul>
 			</li>
 		</ul>
-		
-		<ul id="subCategoryList" class="write-drop" style="display:none">
-			<li class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" id="writeCategory" data-toggle="dropdown" aria-expanded="true">
-					<span id="subCategoryTitle">서브 카테고리</span>
-					<span class="caret"></span>
-				</button>
-				<ul id="sublist" class="dropdown-menu" aria-labelledby="writeCategory"></ul>				
-			</li>
-		</ul>
 	<hr/>
-	<form name="write_form" class="form-horizontal" th:action="@{/blog/write/reg}" method="post" enctype="multipart/form-data">
-	<!-- 	<input type="hidden" name="category" value=""/> -->
+	<form name="writeForm" class="form-horizontal" th:action="@{/blog/write/reg}" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="category" value=""/>
 		<div class="form-group">
 		    <label for="bdTitle" class="col-sm-2 control-label text-center"><p class="text-center">제 목</p></label>
@@ -76,7 +64,7 @@
 </div>
 <script layout:fragment="custom-script">
 //<![CDATA[
-	$(document).ready(function(){
+	$(document).ready(function(){		
 		$('#summernote').summernote({	
 			toolbar: [
                    ['style', ['style']],
@@ -104,8 +92,16 @@
 					
 				}
 			}
-		});		
+		});
+		
+		/* $('.areaSyntax').on('keydown',function(e){
+			console.log(e.which);
+		}); */
+		
+		
 	});	
+	
+	
 	
 /*SH List Set*/	
 	var makeSHBtn = function(arr,ui){
@@ -149,8 +145,8 @@
                    $dropdown.find('button').each(function () {
                         $(this).click(function(){  
                         	var pre = document.createElement('pre');
-                        	$(pre).addClass('brush:js sh'); 
-                        	$(pre).html("<p></p>");
+                        	$(pre).addClass('brush:js sh areaSyntax'); 
+                        	$(pre).html("<p>&lt;script&gt;&lt;/script&gt;<\/p>");
                             $('#summernote').summernote('insertNode', pre);
                         });
                     }); 
@@ -163,24 +159,8 @@
 /*SH List Set*/	
 	
 	function selectCategoty(id,name){
-		//$('input[name=category]').val(id);
+		$('input[name=category]').val(id);	
 		$('#categoryTitle').text(name);
-		$.get('/blog/json/subMenu/'+name,{},function(data){	
-			var subList = '';
-			console.log(data);
-			for(index in data){
-				var subId = data[index].cat_id;
-				var subName = data[index].sub_cat_name;
-				subList += '<li><a tabindex="-1" href="javascript:selectSubCategory(\''+subId+'\',\''+subName+'\');">'+subName+'</a></li>';				
-			}	
-			$('#sublist').html(subList);
-		});		
-		$('#subCategoryList').show();
-	};
-	
-	function selectSubCategory(subId,subName){
-		$('input[name=category]').val(subId);
-		$('#subCategoryTitle').text(subName);
 	};
 	
 	function sendFile(file) {

@@ -29,15 +29,18 @@ Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper
 			<ul class="pager">
 			    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 이전 글 제목</a></li>
 			    <li class="next"><a href="#">다음 글 제목 <span aria-hidden="true">&rarr;</span></a></li>
-			  </ul>
+			 </ul>
 		</div>
 		
 		<div class="panel panel-info">
 			<div class="panel-heading" th:text="${BOARD.category.name} + ' 카테고리의 포스팅'">카테고리</div>
 			<div class="panel-body">
 			    <ul class="view-other" th:each="list : ${LIST}">
-			    	<li><span th:text="${list[1]}">title</span><spna class="pull-right" th:text="${#dates.format(list[2],'yyyy-MM-dd')}">0000-01-01</spna></li>
-			    	<li class="bg-info">a</li>
+			    	<li  th:classappend="${list[0] == BOARD.seqNo}? 'bg-info': ''">
+			    	<a th:href="'/blog/view/' + ${list[0]}" class="line">
+			    	<span th:text="${list[1]}">title</span><spna class="pull-right" th:text="${#dates.format(list[2],'yyyy-MM-dd')}">0000-01-01</spna>
+			    	</a>
+			    	</li>
 			    </ul>
 			</div>
 		</div>
@@ -119,51 +122,38 @@ Etiam rhoncus.
 <div class="row">
 	<div class="col-lg-9 col-md-12">
 		<div class="view_top">
-			<h1>Post Title<small> - Category</small></h1>
+			<h1 th:text="${BOARD.title}">Post Title<small th:text="' - '+ ${BOARD.categoty.name}"> - Category</small></h1>
 			<p class="">
-				<span><strong>Post on</strong> 2015.12.18</span>
-				<span class="glyphicon glyphicon-eye-open">0</span>
+				<span><strong>Post on</strong> <span th:text="${#dates.format(BOARD.regDate,'yyyy-MM-dd HH:mm:ss')}">2015.12.18</span></span>
+				<!-- <span class="glyphicon glyphicon-eye-open">0</span>
 				<span class="glyphicon glyphicon-comment">0</span>
-				<span class="glyphicon glyphicon-heart">0</span>
+				<span class="glyphicon glyphicon-heart">0</span> -->
 			</p>			
 		</div>	
-		<div class="view_contents">
+		<div class="view_contents"  th:text="${BOARD.contents}">
 				Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
 Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
 Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
 Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus.
-		</div>		
+		</div>				
 		<div class="view_post_nav">
 			<ul class="pager">
 			    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 이전 글 제목</a></li>
 			    <li class="next"><a href="#">다음 글 제목 <span aria-hidden="true">&rarr;</span></a></li>
 			  </ul>
 		</div>
-		<div class="other-row row">		
-		  <div class="col-md-2">
-		    <a href="#" class="thumbnail">
-		      <img src="/image/space.png" alt="..."/>
-		       <p>aaaa</p>
-		    </a>		   
-		  </div>
-		   <div class="col-md-2">
-		    <a href="#" class="thumbnail">
-		      <img src="/image/space.png" alt="..."/>
-		       <p>aaaa</p>
-		    </a>		   
-		  </div>
-		   <div class="col-md-2">
-		    <a href="#" class="thumbnail">
-		      <img src="/image/space.png" alt="..."/>
-		       <p>aaaa</p>
-		    </a>		   
-		  </div>
-		   <div class="col-md-2">
-		    <a href="#" class="thumbnail">
-		      <img src="/image/space.png" alt="..."/>
-		       <p>aaaa</p>
-		    </a>		   
-		  </div>		 
+		
+		<div class="panel panel-info">
+			<div class="panel-heading" th:text="${BOARD.category.name} + ' 카테고리의 포스팅'">카테고리</div>
+			<div class="panel-body">
+			    <ul class="view-other" th:each="list : ${LIST}">
+			    	<li  th:classappend="${list[0] == BOARD.seqNo}? 'bg-info': ''">
+			    	<a th:href="'/blog/view/' + ${list[0]}" class="line">
+			    	<span th:text="${list[1]}">title</span><spna class="pull-right" th:text="${#dates.format(list[2],'yyyy-MM-dd')}">0000-01-01</spna>
+			    	</a>
+			    	</li>
+			    </ul>
+			</div>
 		</div>		
 	</div>
 </div>

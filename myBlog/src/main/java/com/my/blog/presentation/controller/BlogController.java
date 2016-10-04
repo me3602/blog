@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.my.blog.domain.model.entity.Board;
 import com.my.blog.presentation.Service.BlogService;
+import com.my.blog.util.CommUtil;
 
 @RestController
 @RequestMapping(value="/blog")
@@ -55,13 +56,21 @@ public class BlogController {
 		//메뉴 
 		mav.addObject("CATEGORY", blogService.getCategory());
 		
-		//현재 메뉴
-		mav.addObject("CURRENT_CATEGORY", blogService.getCurrentCategory(mode));
 		
-		if(mode.equals("intro")) mav.addObject("LIST", blogService.getIntroBoardList(pageable));
-		else  mav.addObject("LIST", blogService.getBoardList(mode,pageable));
+		if(CommUtil.isNumberic(mode)){
+			//현재 메뉴
+			mav.addObject("CURRENT_CATEGORY", blogService.getCurrentCategory(mode));
+			mav.addObject("LIST", blogService.getBoardList(mode,pageable));
+		}else{
+			mav.addObject("LIST", blogService.getIntroBoardList(pageable));
+		}
 		
 	
+		
+		/*
+		if(mode.equals("intro")) mav.addObject("LIST", blogService.getIntroBoardList(pageable));
+		else mav.addObject("LIST", blogService.getBoardList(mode,pageable));
+		*/
 		
 		mav.setViewName("blog/skin/"+ skin +"/list");
 		return mav;
@@ -92,7 +101,29 @@ public class BlogController {
 		//DB에서 블로그 스킨 조회
 		String skin = "1st";
 		
+		//메뉴
+		mav.addObject("CATEGORY", blogService.getCategory());
+		
+		
+		mav.setViewName("/blog/skin/"+skin+"/write");
 		return mav;		
+	}
+	
+	@RequestMapping(value = "/write/{mode}", method=RequestMethod.POST)
+	public void getBlogWriteProcess(ModelAndView mav
+			, @PathVariable String mode
+			, @RequestParam HashMap<String,Object> params){
+		
+		System.out.println(params.toString());
+		/*//DB에서 블로그 스킨 조회
+		String skin = "1st";
+		
+		//메뉴
+		mav.addObject("CATEGORY", blogService.getCategory());
+		
+		
+		mav.setViewName("/blog/skin/"+skin+"/write");
+		return mav;		*/
 	}
 /*	
 	@RequestMapping(value = "/write/{mode}", method=RequestMethod.POST)

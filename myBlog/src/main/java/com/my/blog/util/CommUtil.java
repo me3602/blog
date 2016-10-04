@@ -1,6 +1,8 @@
 package com.my.blog.util;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,6 +23,13 @@ public class CommUtil {
 			e.printStackTrace();
 		}
 		return result;		
+	}
+	
+	static public boolean isNumberic(String str){		
+		NumberFormat formatter = NumberFormat.getInstance();
+		ParsePosition pos = new ParsePosition(0);
+		formatter.parse(str, pos);
+		return str.length() == pos.getIndex();
 	}
 
 }
